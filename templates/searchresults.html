@@ -1,0 +1,16 @@
+{% extends 'base.html' %}
+
+{% block title %}DocuSearcher search results{% endblock %}
+
+{% block main %}
+
+{% if results=='empty'%}
+<br>
+<br>
+<h1>Nothing found try another search...</h1>
+{% else %}
+<br>
+<br>
+<h1>results</h1>
+{%endif%}
+{%endblock%}
