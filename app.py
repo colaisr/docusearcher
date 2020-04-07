@@ -15,7 +15,6 @@ def get_all_documents():
     pathToDoc=curdir+'/static/documents'
     f=listdir(pathToDoc)
     onlyfiles = [f for f in listdir(pathToDoc) if isfile(join(pathToDoc, f))]
-    print(onlyfiles)
     allpdfs={}
     for file in onlyfiles:
         if(file!='.DS_Store'):
@@ -71,4 +70,4 @@ def page_not_found(error):
 
 
 
-#comment
+app.run()
