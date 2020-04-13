@@ -41,7 +41,7 @@ def search():
     results=searcher.search_content_in_db(get_all_documents(),searchFor)
     if not bool(results):
         results='empty'
-    return render_template('searchresults.html',results=results)
+    return render_template('searchresults.html',searched=searchFor,results=results)
 
 
 @app.route('/removeDocument' , methods=['POST'])

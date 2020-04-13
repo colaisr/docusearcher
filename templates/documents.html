@@ -9,6 +9,9 @@
   <br>
   <br>
   <br>
+    <div class="alert alert-primary" hidden id="mbUploading" role="alert">
+  Uploading and parsing the document.
+    </div>
 
 
   <h1>Files Library</h1>
@@ -17,7 +20,7 @@
         <h4 class="my-0 font-weight-normal text-center">Upload document</h4>
       </div>
       <div class="card-body">
-        <form action="uploaddocument" method="post" enctype="multipart/form-data">
+        <form id="fUpload" action="uploaddocument" method="post" enctype="multipart/form-data">
           <label for="long_url">Select Document</label>
           <input type="file" class="form-control" name="file" id="file" required>
           <br>
@@ -68,5 +71,13 @@
 </div>
 </div>
 
+<script>
+  function notifyU(event)
+   {
+        document.getElementById('mbUploading').removeAttribute("hidden");
+   }
+const formU = document.getElementById('fUpload');
+formU.addEventListener('submit', notifyU);
+</script>
 
 {% endblock %}

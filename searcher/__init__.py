@@ -43,9 +43,10 @@ def search_in_all_files(allFiles,searchFor):
 
 def search_content_in_db(allFiles,searchFor):
     matches={}
-    conn = sqlite3.connect(os.curdir+'/static/' +'example.db')
+    conn = sqlite3.connect(os.curdir+'/static/' +'documents.db')
 
     cur = conn.cursor()
+    searchFor=searchFor.replace(" ","_")
     cur.execute("SELECT path FROM file_contents WHERE content LIKE '%"+searchFor+"%'")
 
     rows = cur.fetchall()

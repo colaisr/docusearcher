@@ -3,19 +3,18 @@
 {% block title %}DocuSearcher search results{% endblock %}
 
 {% block main %}
-
+<br>
+<br>
+<br>
+<h1>Searched for : "{{searched}}"</h1>
 {% if results=='empty'%}
-<br>
-<br>
+
 <h1>Nothing found try another search...</h1>
 {% else %}
-<br>
-<br>
+
 <div class="container-fluid">
-  <br>
-  <br>
-  <br>
-  <h1>Files Library</h1>
+
+  <h2>Was found in :</h2>
   <div class="card mb-4 shadow-sm">
 
         <div class="table-responsive">

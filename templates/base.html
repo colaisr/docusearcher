@@ -15,8 +15,9 @@
 <body>
     <nav class="navbar navbar-dark fixed-top bg-dark flex-md-nowrap p-0 shadow">
   <a class="navbar-brand col-sm-3 col-md-2 mr-0" href="/">DocU Searcher</a>
-      <form action="search" method="post">
-  <input class="form-control form-control-dark w-100" name="phrase" id="phrase" type="text" placeholder="Search" aria-label="Search">
+      <form action="search" method="post" id="search">
+  <input class="form-control form-control-dark w-100" name="phrase" id="phrase" type="text" placeholder="Search" aria-label="Search"
+  data-toggle="modal" data-target="#exampleModal">
       </form>
   <ul class="navbar-nav px-3">
     <li class="nav-item text-nowrap">
@@ -25,6 +26,12 @@
   </ul>
   </nav>
 
+    <!-- Button trigger modal -->
+    <br>
+    <br>
+<div class="alert alert-success" hidden id="mbSearch" role="alert">
+  Search started
+</div>
 
 
   {% for message in get_flashed_messages() %}
@@ -37,11 +44,20 @@
 
   {% block main %}{% endblock %}
 
+
   <!-- Optional JavaScript -->
   <!-- jQuery first, then Popper.js, then Bootstrap JS -->
   <script src="{{ url_for('static', filename='jquery-3.3.1.slim.min.js') }}"></script>
   <script src="{{ url_for('static', filename='popper.min.js') }}"></script>
   <script src="{{ url_for('static', filename='bootstrap.min.js') }}"></script>
+<script>
+  function notify(event)
+   {
+        document.getElementById('mbSearch').removeAttribute("hidden");
+   }
+const form = document.getElementById('search');
+form.addEventListener('submit', notify);
+</script>
 </body>
 
 </html>
