@@ -2,7 +2,6 @@ import datetime
 from flask import Flask, render_template, request, redirect, url_for, flash, abort, session, jsonify, send_file
 from os import listdir,curdir
 from os.path import isfile, join,getmtime
-from werkzeug.utils import secure_filename
 import os
 import searcher
 
@@ -37,7 +36,7 @@ def home():
 @app.route('/search', methods=['POST'])
 def search():
     searchFor=request.form['phrase']
-    #todo: searchresults
+
     results=searcher.search_content_in_db(get_all_documents(),searchFor)
     if not bool(results):
         results='empty'
@@ -46,13 +45,16 @@ def search():
 
 @app.route('/removeDocument' , methods=['POST'])
 def removeDocument():
+    #todo remove record from DB
     fileToRemove=curdir+'/static/documents/'+request.form['filename']
     os.remove(fileToRemove)
+    searcher.remove_from_db(fileToRemove)
     return redirect(url_for('documents'))
 
 
 @app.route('/uploaddocument', methods=['POST'])
 def uploadFile():
+    #todo replace in DB records
     f = request.files['file']
     path_to_Doc=os.curdir+'/static/documents/' + f.filename
     f.save(path_to_Doc)

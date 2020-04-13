@@ -147,6 +147,11 @@ def store_Document_in_Db(path_to_Doc, file_text):
         # Create table
         c.execute('''CREATE TABLE file_contents
                      (path TEXT, content TEXT)''')
+
+    if file_in_table(path_to_Doc,c):
+        remove_record(path_to_Doc,c)
+        # Save (commit) the changes
+        conn.commit()
     file_text=str(file_text)
     file_text=file_text.replace("'","''")
     # Insert a row of data
@@ -181,4 +186,35 @@ def addToDB(path_to_Doc):
         store_PDF(path_to_Doc)
     elif ".docx" in path_to_Doc:
         store_Word(path_to_Doc)
+    return None
+
+
+def file_in_table(fileToRemove, c):
+    # get the count of tables with the name
+    c.execute("SELECT  path FROM file_contents WHERE path like '%"+fileToRemove+"'")
+
+    result=c.fetchone()
+
+    if result:
+        return True
+    else:
+        return False
+    pass
+
+
+def remove_record(fileToRemove, c):
+    c.execute("DELETE FROM file_contents WHERE path like '%"+fileToRemove+"%'")
+    pass
+
+
+def remove_from_db(fileToRemove):
+    conn = sqlite3.connect(os.curdir + '/static/' + 'documents.db')
+    c = conn.cursor()
+
+    if file_in_table(fileToRemove,c):
+        remove_record(fileToRemove,c)
+        # Save (commit) the changes
+        conn.commit()
+
+    conn.close()
     return None
