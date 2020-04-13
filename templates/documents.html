@@ -41,7 +41,9 @@
               <tr>
                 <td>
                  <a href="{{value['location']}}">
+                    {% if '.pdf' in value['location'] %}
                      <embed src="{{value['location']}}" width="100px" height="120px"  />
+                     {% endif %}
                      <p>{{ key }}</p>
                  </a>
                 </td>

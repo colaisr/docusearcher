@@ -38,7 +38,7 @@ def home():
 def search():
     searchFor=request.form['phrase']
     #todo: searchresults
-    results=searcher.search_in_all_files(get_all_documents(),searchFor)
+    results=searcher.search_content_in_db(get_all_documents(),searchFor)
     if not bool(results):
         results='empty'
     return render_template('searchresults.html',results=results)
@@ -54,7 +54,10 @@ def removeDocument():
 @app.route('/uploaddocument', methods=['POST'])
 def uploadFile():
     f = request.files['file']
-    f.save(os.curdir+'/static/documents/' + f.filename)
+    path_to_Doc=os.curdir+'/static/documents/' + f.filename
+    f.save(path_to_Doc)
+    searcher.addToDB(path_to_Doc)
+
     return redirect(url_for('documents'))
 
 

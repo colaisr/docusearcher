@@ -23,7 +23,7 @@
           <thead>
             <tr>
               <th>File</th>
-              <th>Pages mentioned</th>
+
               <th>actions</th>
             </tr>
           </thead>
@@ -38,12 +38,7 @@
                      <p>{{ key }}</p>
                  </a>
                 </td>
-                <td>
-                    {% for match in value %}
-                    <p>{{match['page']}}</p>
-                    {% endfor %}
 
-                </td>
                 <td>
                     <a href="/getdocument/{{ key }}" download=""><button >Download!</button></a>
                 </td>
