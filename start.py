@@ -12,6 +12,9 @@ app.secret_key = 'h432hi5ohi3h5i5hi3o2hi'
 def get_all_documents():
     """ Returns the dictionary of all files"""
     pathToDoc=curdir+'/static/documents'
+    if not os. path. isdir(pathToDoc):
+        os.mkdir(pathToDoc)
+
     f=listdir(pathToDoc)
     onlyfiles = [f for f in listdir(pathToDoc) if isfile(join(pathToDoc, f))]
     allpdfs={}
