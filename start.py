@@ -48,7 +48,6 @@ def search():
 
 @app.route('/removeDocument' , methods=['POST'])
 def removeDocument():
-    #todo remove record from DB
     fileToRemove=curdir+'/static/documents/'+request.form['filename']
     os.remove(fileToRemove)
     searcher.remove_from_db(fileToRemove)
@@ -57,7 +56,6 @@ def removeDocument():
 
 @app.route('/uploaddocument', methods=['POST'])
 def uploadFile():
-    #todo replace in DB records
     # f = Flask.request.files.getlist("file")
     files=request.files.getlist("file")
     for f in files:
