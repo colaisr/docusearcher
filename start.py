@@ -58,10 +58,14 @@ def removeDocument():
 @app.route('/uploaddocument', methods=['POST'])
 def uploadFile():
     #todo replace in DB records
-    f = request.files['file']
-    path_to_Doc=os.curdir+'/static/documents/' + f.filename
-    f.save(path_to_Doc)
-    searcher.addToDB(path_to_Doc)
+    # f = Flask.request.files.getlist("file")
+    files=request.files.getlist("file")
+    for f in files:
+        path_to_Doc=os.curdir+'/static/documents/' + f.filename
+        f.save(path_to_Doc)
+        searcher.addToDB(path_to_Doc)
+        print('successfully added:'+path_to_Doc)
+
 
     return redirect(url_for('documents'))
 
